@@ -17,7 +17,7 @@ function TableBody({data}){
         data.map(
             (v,i,a)=>
                 {
-                    return(<TableRow row={v}/>)
+                    return(<TableRow key={"el"+i} row={v}/>)
                 }
         )
         }
@@ -30,7 +30,7 @@ function TableHeader({children, columns}) {
         <tr>
             {
                 columns.map((v,i,a)=>{
-                    return (<th>{v.title}</th>);
+                    return (<th key={"hell"+i}>{v.title}</th>);
                 })
             }
         </tr>
