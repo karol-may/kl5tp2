@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
 
 function FormValidation({validationRules,value}){
-    return(<p>Błąd!</p>)
+
+    let _msgs = "";
+
+    validationRules.map((v,i,a)=>{
+        if (!v.rule(value)) { _msgs += v.msg + " " }
+    })
+
+    return(<p>{_msgs}</p>)
 }
 
 function FormInput({idx, label, value, validationRules, onChange}) {
@@ -24,6 +31,23 @@ function Form() {
     useEffect(()=>{
         formValidate();
     },[link,label])
+
+
+    
+    let validationRules = [
+        {
+            rule: (value)=>{return(value.length > 3)},
+            msg: "Długość musi być większa niż 3 znaków!",
+        },
+        {
+            rule: (value)=>{return(value.length < 10)},
+            msg: "Długość musi być mniejsza niż 10 znaków!"
+        },
+        {
+            rule: (value)=>{return(value.includes("@"))},
+            msg: "Pole musi zawierać znak @"
+        }
+    ]
 
     function formValidate(){        
       
